@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.css';
+import {Header} from "./components/Header/Header";
+import {Routes} from "./routes/routes";
+
 
 const App = () => {
     return (
         <div className="App">
-                {/*hr , provider*/}
-                <>
-                    {/*/!*<Header/>*!/ navLink*/}
-
-
-                </>
+                <Header/>
+                <Routes/>
         </div>
     );
 };
