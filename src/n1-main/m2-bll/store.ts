@@ -1,20 +1,25 @@
-import {combineReducers, applyMiddleware, createStore} from 'redux'
-import {forgotPasswordReducer} from "./forgot-password-reducer";
-import {newPasswordReducer} from "./newPassword-reducer";
-import {profileReducer} from "./profile-reducer";
-import {signInReducer} from "./sign-in-reducer";
-import {signUpReducer} from "./sing-up-reduce";
-import thunkMiddleware from 'redux-thunk'
-import {composeWithDevTools} from "redux-devtools-extension";
+import {combineReducers, createStore, compose, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import {loginReducer} from "./loginReducer";
+import {registerReducer} from "./registerReducer";
+import {passwRestoreReducer} from "./passwRestoreReducer";
+import {passwUpdateReducer} from "./passwUpdateReducer";
+import {profileReducer} from "./profileReducer";
 
 const rootReducer = combineReducers({
-    forgotPassword:forgotPasswordReducer,
-    newPassword:newPasswordReducer,
-    profileReducer:profileReducer,
-    signIn:signInReducer,
-    singUp:signUpReducer
-})
+    login: loginReducer,
+    register: registerReducer,
+    passwRestore: passwRestoreReducer,
+    passwUpdate: passwUpdateReducer,
+    profile: profileReducer
+});
 
-export const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunkMiddleware)))
+export const store = createStore(rootReducer, compose(
+    applyMiddleware(thunk),
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+));
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
+
+// @ts-ignore
+window.store = store;

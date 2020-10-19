@@ -1,5 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+/idea
 # dependencies
 /node_modules
 /.pnp
@@ -10,8 +10,6 @@
 
 # production
 /build
-/.idea
-
 
 # misc
 .DS_Store
@@ -23,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/n1-main/m3-dal/
+src/n2-features/f0-test/
+.idea/.gitignore
+.idea/codeStyles/
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/team--app.iml
+.idea/vcs.xml
