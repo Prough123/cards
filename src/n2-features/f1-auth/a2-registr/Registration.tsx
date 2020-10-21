@@ -4,11 +4,12 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import Button from "../../../n1-main/m1-ui/common/Button/Button";
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {registerUser, setError} from "../../../n1-main/m2-bll/registerReducer";
+import {registerUser} from "../../../n1-main/m2-bll/b1-registrationReducer/registerReducer";
 import {AppRootStateType} from "../../../n1-main/m2-bll/store";
 import Loader from "../../../n1-main/m1-ui/common/Loader/Loader";
 import {Redirect} from 'react-router-dom';
 import blue from "@material-ui/core/colors/blue";
+import {setError} from "../../../n1-main/m2-bll/b1-registrationReducer/actions";
 
 type FormikErrorType = {
     email?: string;

@@ -3,6 +3,8 @@ import {AppBar, IconButton, Toolbar, Typography, Box, Grid} from '@material-ui/c
 import {Link} from 'react-router-dom';
 import {Menu} from '@material-ui/icons'
 import {makeStyles} from '@material-ui/core/styles';
+import {useSelector} from "react-redux";
+import {selectStateLogin} from "../../m2-bll/b3-loginReducer/selectors";
 
 const useStyles = makeStyles({
     root: {
@@ -18,6 +20,7 @@ const useStyles = makeStyles({
 });
 
 const Header = () => {
+    const {isLoggedIn} = useSelector(selectStateLogin)
     const classes = useStyles();
     return (
         <AppBar position="static">
@@ -48,13 +51,8 @@ const Header = () => {
                                 </Link>
                             </Typography>
                         </Box>
-                        <Box mr={1}>
-                            <Typography variant="subtitle1">
-                                <Link to="/profile" className={classes.root}>
-                                    Profile
-                                </Link>
-                            </Typography>
-                        </Box>
+
+
                         <Box mr={1}>
                             <Typography variant="subtitle1">
                                 <Link to="/restore" className={classes.root}>
@@ -62,11 +60,20 @@ const Header = () => {
                                 </Link>
                             </Typography>
                         </Box>
-                        <Typography variant="subtitle1">
-                            <Link to="/update" className={classes.root}>
-                                Update password
-                            </Link>
-                        </Typography>
+                        <Box mr={1}>
+                            <Typography variant="subtitle1">
+                                <Link to="/update" className={classes.root}>
+                                    Update password
+                                </Link>
+                            </Typography>
+                        </Box>
+                        {isLoggedIn ? <Box mr={1}>
+                            <Typography variant="subtitle1">
+                                <Link to="/profile" className={classes.root}>
+                                    Profile
+                                </Link>
+                            </Typography>
+                        </Box> : null}
                     </Toolbar>
                 </Grid>
             </Grid>
