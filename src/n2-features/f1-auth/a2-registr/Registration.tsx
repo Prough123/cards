@@ -4,12 +4,12 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import Button from "../../../n1-main/m1-ui/common/Button/Button";
 import {useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {registerUser} from "../../../n1-main/m2-bll/b1-registrationReducer/registerReducer";
+import {registerUser} from "../../../n1-main/m2-bll/b5-registrationReducer/registerReducer";
 import {AppRootStateType} from "../../../n1-main/m2-bll/store";
 import Loader from "../../../n1-main/m1-ui/common/Loader/Loader";
 import {Redirect} from 'react-router-dom';
 import blue from "@material-ui/core/colors/blue";
-import {setError} from "../../../n1-main/m2-bll/b1-registrationReducer/actions";
+import {setError} from "../../../n1-main/m2-bll/b1-app/appReducer";
 
 type FormikErrorType = {
     email?: string;
@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
 const Registration = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const {isLoading, isRegistered, error: userError} = useSelector<AppRootStateType, { isLoading: boolean, isRegistered: boolean, error: string | null }>(state => state.register);
+    const { isRegistered} = useSelector<AppRootStateType, { isRegistered: boolean, }>(state => state.register);
+    const {isLoading, error: userError} = useSelector<AppRootStateType, { isLoading: boolean,error: string | null }>(state => state.app)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -61,15 +62,15 @@ const Registration = () => {
         },
         onSubmit: values => {
             dispatch(registerUser(values))
-            //check the values
-            // alert(JSON.stringify(values, null, 2));
         }
     })
+
     if (userError) formik.errors.email = userError;
     useEffect(() => {
         if (userError) dispatch(setError(null));
     }, [dispatch, formik.values, userError]);
     const isValid = formik.errors.email || formik.errors.password;
+
     return (
         <Container maxWidth="xs" className={classes.container}>
             <Box height="100%" display="flex" mt={8} flexDirection="column" alignItems="center">

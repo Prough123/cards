@@ -1,32 +1,35 @@
 import {Dispatch} from "react";
 import {authAPI, ForgotPasswordType} from "../../m3-dal/api";
-import {setIsErrorAC, setIsLoadingAC, setIsLoggedInAC} from "../b3-loginReducer/actions";
-import {ActionsType, setIsEmailAC} from "./actions";
+import {ActionTypes} from "../store";
+
 
 const initialState = {
-    email: '',
+    info: '',
 };
 
 type InitialStateType = typeof initialState
 
-export const passwRestoreReducer = (state: InitialStateType = initialState, action: ActionsType ): InitialStateType => {
+export const passwRestoreReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     return state;
 };
 
-export const forgotPasswordTc = (data:ForgotPasswordType) => async (dispatch:Dispatch<ActionsType>) => {
-    debugger
-    dispatch(setIsLoadingAC(true))
-    try {
-        debugger
-        const response = await authAPI.forgotPassword(data)
-        console.log(response.data.info)
-        dispatch(setIsLoadingAC(false))
 
-    }catch (error){
+const actions = {
+    setIsEmailAC: (email: string) => ({type: 'SET_IS_EMAIL', email} as const)
+}
+
+export const forgotPasswordTC = (data: ForgotPasswordType) => async (dispatch: Dispatch<ActionTypes>) => {
+    const requestData = {
+        ...data,
+        from: 'test-front-admin <slipok1999@mail.ru>',
+        message: `<div>password recovery link: <a href='http://localhost:3000/#/update/$token$'>TAP TAP TAP</a></div>`
+    }
+    try {
+        const response = await authAPI.forgotPassword(requestData)
+        console.log(response.data.info)
+
+    } catch (error) {
         console.log(error.response.data.error)
-        dispatch(setIsErrorAC(error.response.data.error))
-        dispatch(setIsLoadingAC(false))
-        debugger
     }
 }
 

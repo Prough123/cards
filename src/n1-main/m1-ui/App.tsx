@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
+import {HashRouter} from 'react-router-dom';
 import Routers from "./routes/Routers";
 import Header from "./header/Header";
-import {theme} from "./styles/main";
-import {BrowserRouter} from "react-router-dom";
 import {Grid, ThemeProvider} from "@material-ui/core";
+import {theme} from "./styles/main";
 
 const App = () => {
     return (
         <ThemeProvider theme={theme}>
-            <BrowserRouter>
+            <HashRouter>
                 <div className="App">
                     <Header/>
                     <Grid container justify="space-around">
@@ -18,7 +18,7 @@ const App = () => {
                         </Grid>
                     </Grid>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         </ThemeProvider>
     );
 }

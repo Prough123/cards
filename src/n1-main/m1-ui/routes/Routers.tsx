@@ -5,45 +5,39 @@ import Registration from "../../../n2-features/f1-auth/a2-registr/Registration";
 import Profile from "../../../n2-features/f1-auth/a4-profile/Profile";
 import {Login} from "../../../n2-features/f1-auth/a1-login/Login";
 import styles from './Routers.module.css';
-import {PasswordUpdate} from "../../../n2-features/f1-auth/a4-update/PasswordUpdate";
-import {PasswordRestore} from "../../../n2-features/f1-auth/a3-restore/PasswordRestore";
+import {UpdatePassword} from "../../../n2-features/f1-auth/a4-update/UpdatePassword";
+import {RestorePassword} from "../../../n2-features/f1-auth/a3-restore/RestorePassword";
 
 
 const Routers = () => {
     return (
         <Switch>
             <Route
-                path="/"
-                exact
-                component={Main}
+                exact path="/"
+                render={() => <Main/>}
             />
             <Route
                 path="/registration"
-                exact
-                component={Registration}
+                render={() => <Registration/>}
             />
             <Route
                 path="/login"
-                exact
-                component={Login}
+                render={() => <Login/>}
             />
             <Route
                 path="/profile"
-                exact
-                component={Profile}
+                render={() => <Profile/>}
             />
             <Route
                 path="/restore"
-                exact
-                component={PasswordRestore}
+                render={() => <RestorePassword/>}
             />
             <Route
-                path="/update/:token"
-                exact
-                component={PasswordUpdate}
+                path="/update/:id"
+                render={() => <UpdatePassword/>}
             />
-            {/*<Route path={'/404'} render={() => <h1>404</h1>}/>*/}
-            {/*<Redirect from={'*'} to={'/404'}/>*/}
+            <Route path={'/404'} render={() => <h1>404</h1>}/>
+            <Redirect from={'*'} to={'/404'}/>
         </Switch>
     );
 }

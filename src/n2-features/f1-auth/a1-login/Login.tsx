@@ -18,6 +18,7 @@ import {loginTC} from "../../../n1-main/m2-bll/b3-loginReducer/loginReducer";
 import {Redirect} from 'react-router-dom';
 import {selectStateLogin} from "../../../n1-main/m2-bll/b3-loginReducer/selectors";
 import Loader from "../../../n1-main/m1-ui/common/Loader/Loader";
+import {selectStateApp} from "../../../n1-main/m2-bll/b1-app/selectors";
 
 
 type FormikErrorType = {
@@ -61,7 +62,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Login = () => {
-    const {isLoggedIn, isLoading} = useSelector(selectStateLogin)
+    const {isLoggedIn} = useSelector(selectStateLogin)
+    const {isLoading} = useSelector(selectStateApp)
     const dispatch = useDispatch()
 
     const classes = useStyles();
